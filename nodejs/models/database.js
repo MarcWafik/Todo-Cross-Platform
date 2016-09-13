@@ -8,7 +8,10 @@ var mysql = require("mysql");
 var DataBase = function () {};
 
 DataBase._Instance = null;
-
+/**
+ * connect to database if connection not set
+ * @returns {mysql connection}Data base instance
+ */
 DataBase.getInstance = function () {
 	if (DataBase._Instance === null) {
 

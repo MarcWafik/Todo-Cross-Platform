@@ -1,27 +1,30 @@
 "use strict";
 
 app.controller("ToDoController", function ($state, $scope, $cordovaDialogs, $cordovaVibration, User, ToDo) {
+    ionic.Platform.ready(function () {
+        $scope.toDosArr = [];
+        $scope.imputTodo = new ToDo();
 
+        if (!User._IsLogedin) {
+            $state.go('login');
+        }
 
-	$scope.toDosArr = [];
-
-	ToDo.ReadAll(User.GetInstance().id, $scope.toDosArr);
-
-	$scope.imputTodo = new ToDo();
-
-	if (!User._IsLogedin) {
-		$state.go('login');
-	}
-
+        ToDo.UserConnect(User.GetInstance().id, function () {
+            $scope.toDosArr = [];
+            return $scope.toDosArr;
+        });
+        for (var i in $scope.toDosArr) {
+            $scope.toDosArr[i].alertTimeRemainig(alertMessage);
+        }
+    });
 	/**
-	 * add a new to do item to database using scope and 2 way data binding
+	 * add a new todo item to database using scope and 2 way data binding
 	 */
 	$scope.Add = function () {
-		$scope.imputTodo.creatDate = new Date();
 		$scope.imputTodo.userID = User.GetInstance().id;
 		$scope.imputTodo.alertTimeRemainig(alertMessage);
 		$scope.toDosArr.push($scope.imputTodo);
-		$scope.imputTodo.creat();
+		$scope.imputTodo.create();
 		$scope.imputTodo = new ToDo();
 	};
 
@@ -58,13 +61,5 @@ app.controller("ToDoController", function ($state, $scope, $cordovaDialogs, $cor
 					User.GetInstance().update();
 				}, "Todo Reminder", "close");
 	};
-	/**
-	 * loop throw the todo array and check for the reminder
-	 */
-	var Alert = function () {
-		for (var i in $scope.toDosArr) {
-			$scope.toDosArr[i].alertTimeRemainig(alertMessage);
-		}
-	};
-	Alert();
+
 });

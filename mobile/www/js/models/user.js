@@ -45,7 +45,8 @@ app.factory('User', function (Entity, $http) {
 		 * @param {function} callback a function to be called on responce succses or failure and pass a boolean true on succses false on failure
 		 */
 		this.signup = function (callback) {
-
+		    this.timeCreated = new Date();
+		    this.timeUpdated = new Date();
 			var self = this;
 			$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 			$http.post(RESTURL + "user/create/", JSON.stringify(self))
