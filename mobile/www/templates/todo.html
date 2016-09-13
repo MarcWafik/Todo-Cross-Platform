@@ -1,0 +1,28 @@
+<ion-view title="ToDo"  hide-back-button="true">
+    <ion-content class="has-header">
+
+        <form class="list" ng-submit="Add();">
+            <label class="item item-input">
+                <input type="text" placeholder="What needs to be done?" ng-model="imputTodo.text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Due Date</span>
+                <input type="datetime-local" ng-model="imputTodo.dueDate">
+            </label>
+        </form>
+
+        <ion-list show-delete="false" show-reorder="false" can-swipe="true">
+            <ion-item class="item-icon-right" ng-repeat="xToDo in toDosArr track by $index" >
+                <div class="item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="xToDo.isChecked" ng-checked="xToDo.isChecked" ng-change="Check($index)">
+                    </label>
+                    <span>{{xToDo.text}}</span>
+                </div>
+                <i class="icon ion-ios7-arrow-left"></i>
+                <!--<ion-option-button class="button-energized ion-edit" ng-click=""></ion-option-button>-->
+                <ion-option-button class="button button-assertive ion-trash-a" ng-click="Delete($index);"></ion-option-button>
+            </ion-item>
+       </ion-list>
+    </ion-content>
+</ion-view>

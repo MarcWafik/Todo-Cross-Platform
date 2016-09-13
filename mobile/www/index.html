@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet"> -->
+    <!-- -- -- -- -- -- -- -- -- Defaults -- -- -- -- -- -- -- -- -->
+    <script type="text/javascript" src="js/platformOverrides.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ng-cordova-master/dist/ng-cordova.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/app.js"></script>
+    <!-- -- -- -- -- -- -- -- -- Plugins -- -- -- -- -- -- -- -- -->
+    <script type="text/javascript" src="lib/augment-master/augment.js"></script>
+    <!-- -- -- -- -- -- -- -- -- Models -- -- -- -- -- -- -- -- -->
+    <script type="text/javascript" src="js/models/entity.js"></script>
+    <script type="text/javascript" src="js/models/todo.js"></script>
+    <script type="text/javascript" src="js/models/user.js"></script>
+    <!-- -- -- -- -- -- -- -- -- Controlers -- -- -- -- -- -- -- -- -->
+    <script type="text/javascript" src="js/controllers/signincontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/signupcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/todocontroller.js"></script>
+</head>
+<body ng-app="starter" animation="slide-left-right-ios7">
+    <div>
+        <div>
+            <ion-nav-bar class="bar-positive">
+                <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
+            </ion-nav-bar>
+            <ion-nav-view></ion-nav-view>
+        </div>
+    </div>
+</body>
+</html>

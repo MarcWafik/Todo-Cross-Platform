@@ -1,0 +1,23 @@
+<ion-view title="Signup" id="signup"  hide-back-button="true">
+    <ion-content padding="true" class="has-header">
+        <form class="list ">
+            <ion-list >
+                <label class="item item-input ">
+                    <span class="input-label">Name</span>
+                    <input type="text" placeholder=""  required ng-model="myUser.name">
+                </label>
+                <label class="item item-input ">
+                    <span class="input-label">Username</span>
+                    <input type="text" placeholder=""  required ng-model="myUser.username">
+                </label>
+                <label class="item item-input ">
+                    <span class="input-label">Password</span>
+                    <input type="text" placeholder=""  required ng-model="myUser.pw">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+            <button id="signup-button3" class=" button button-positive button-block " ng-click="Signup()">Sign up</button>
+            <a ui-sref="signin" style="text-align:left;" class=" button button-positive button-block button-clear ">Or login</a>
+        </form>
+    </ion-content>
+</ion-view>
