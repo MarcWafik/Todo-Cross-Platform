@@ -1,23 +1,21 @@
 "use strict";
 
-app.controller("SignUpController", function ( $state, $cordovaDialogs, $cordovaVibration, $scope, User) {
-    $scope.myUser = User.GetInstance();
-    if (User._IsLogedin) {
-        $state.go('todo');
-    }
+app.controller("SignUpController", function ($state, $cordovaDialogs, $cordovaVibration, $scope, User) {
+	$scope.myUser = User.GetInstance();
 
-    /**
-     * creat a user and save it to the storage
-     * @return {boolean} return true if signup succsesfull
-     */
-    $scope.Signup = function () {
-
-        if ($scope.myUser.save()) {
-            $scope.myUser.login();
-            $state.go('todo');
-        } else {
-            $cordovaDialogs.alert("the email is taken", "", "close");
-        }
-    };
-
+	if (User._IsLogedin) {
+		$state.go('todo');
+	}
+	/**
+	 * redirect if signup succses or alerts if signup fails
+	 */
+	$scope.Signup = function () {
+		$scope.myUser.signup(function (result) {
+			if (result) {
+				$state.go('todo');
+			} else {
+				$cordovaDialogs.alert("the email is taken", "", "close");
+			}
+		})
+	};
 });

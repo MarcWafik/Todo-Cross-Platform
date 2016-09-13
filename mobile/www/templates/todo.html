@@ -1,4 +1,4 @@
-<ion-view title="ToDo"  hide-back-button="true">
+<ion-view title="ToDo" >
     <ion-content class="has-header">
 
         <form class="list" ng-submit="Add();">
@@ -21,8 +21,9 @@
                 </div>
                 <i class="icon ion-ios7-arrow-left"></i>
                 <!--<ion-option-button class="button-energized ion-edit" ng-click=""></ion-option-button>-->
-                <ion-option-button class="button button-assertive ion-trash-a" ng-click="Delete($index);"></ion-option-button>
+                <ion-option-button class="button-clear button-assertive ion-trash-a" ng-click="Delete($index);"></ion-option-button>
             </ion-item>
-       </ion-list>
+		</ion-list>
+
     </ion-content>
 </ion-view>
