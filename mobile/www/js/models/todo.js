@@ -51,8 +51,7 @@ app.factory('ToDo', function (Entity, $http) {
 			$http.post(RESTURL + "todo/create/", JSON.stringify(self))
 					.then(function (response) {
 					    if (response.data.status == true) {
-							self.copy(response.data.data);
-							//callback(true);
+					        self.id = response.data.data.insertId;
 						} else {
 							//callback(false);
 						}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2016 at 02:19 PM
+-- Generation Time: Jul 24, 2016 at 02:06 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -53,6 +53,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `name`, `timeCreated`, `timeUpdated`) VALUES
+(0, 'anonymous', 'MC}FtX6?Nl;Ci<L}Y\\Mx9eTt#E-[4emR"]N4L]c|O2g!dn!;D-raG=Zbt~x''a,J', 'anonymous', '2000-01-01 00:00:00', '2000-01-01 00:00:00');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -78,12 +85,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `todos`
 --
 ALTER TABLE `todos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

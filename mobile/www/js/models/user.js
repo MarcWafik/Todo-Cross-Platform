@@ -51,7 +51,7 @@ app.factory('User', function (Entity, $http) {
 			$http.post(RESTURL + "user/create/", JSON.stringify(self))
 					.then(function (response) {
 					    if (response.data.status == true) {
-					        self.copy(response.data.data);
+					        self.id=response.data.data.insertId;
 							User._IsLogedin = true;
 						} else {
 							User._IsLogedin = false;
