@@ -1,34 +1,16 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Sign Up</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<script type="text/javascript" src="plugins/augment.js"></script>
-		<script type="text/javascript" src="models/Parent.js"></script>
-		<script type="text/javascript" src="models/todo.js"></script>
-		<script type="text/javascript" src="models/event.js"></script>
-		<script type="text/javascript" src="models/user.js"></script>
-		<script type="text/javascript" src="controllers/usercontroller.js"></script>
-		<script type="text/javascript" src="controllers/todocontroller.js"></script>
-		<script type="text/javascript" src="views/todoview.js"></script>
-		<script type="text/javascript" src="views/userview.js"></script>
-	</head>
-	<body>
-		<h1 class="text-center">Sign up</h1>
-		<div class="container">
-			<div class="form-row">
-				<label for="email">Email</label>
-				<input type="email" id="email" name="email" required>
-			</div>
-			<div class="form-row">
-				<label for="password">Password</label>
-				<input type="password" id="password" name="password" required>
-			</div>
-			<div id="result"> </div>
-			<div class="form-row">
-				<input type="submit" value="Sign up" onClick="UserView.SignUp(email, password, result)">
-			</div>
-			Already a User ? <a href="login.html">Sign in </a> </div>
-	</body>
-</html>
+<div class="container" ng-app="app" ng-controller="UserController as UserCon">
+    <h1 class="text-center">Sign up</h1>
+    <div class="form-row">
+        <label for="email">Email</label>
+        <input type="text" required ng-model="UserCon.currentUser.username">
+    </div>
+    <div class="form-row">
+        <label for="password">Password</label>
+        <input type="password" required ng-model="UserCon.currentUser.pw">
+    </div>
+    <div id="result"> </div>
+    <div class="form-row">
+        <input type="submit" value="Sign up" ng-click="UserCon.Signup()">
+    </div>
+    Already a User ? <a href="#login">Sign in </a>
+</div>

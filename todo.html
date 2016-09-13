@@ -1,0 +1,17 @@
+<div class="container" ng-controller="ToDoController as ToDoCon">
+    <h1 class="text-center">To Do Application</h1>
+    <form class="form-row addtodo-container">
+
+        <input type="text" placeholder="What needs to be done?" ng-model="todoTitle">
+        <input type="submit" value="+" style="position:absolute;top:9px;right:0px;" ng-click="Add()">
+        <input type="datetime-local" ng-model="todoTimeString">
+
+    </form>
+    <ul class="todo-area" id="todoarea">
+        <li ng-repeat="x in toDosArr track by $index" value="">
+            <input type="checkbox" ng-click="Check($index, this)" ng-model="x.isChecked">
+            {{x.text}}
+            <input type="button" value="x" class="btn-circular" ng-click="Delete($index)">
+        </li>
+    </ul>
+</div>
