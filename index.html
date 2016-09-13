@@ -1,11 +1,39 @@
+<!doctype html>
 <html>
-<head>
-	<title>TO DO Tutorial</title>
-</head>
-<body>
-	<h1>Welcome in TO DO Tutorial</h1>
-
-	<script type="text/javascript" src="models/todo.js"></script>
-	<script type="text/javascript" src="controllers/todocontroller.js"></script>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<title>To Do</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type="text/javascript" src="plugins/augment.js"></script>
+		<script type="text/javascript" src="models/Parent.js"></script>
+		<script type="text/javascript" src="models/todo.js"></script>
+		<script type="text/javascript" src="models/event.js"></script>
+		<script type="text/javascript" src="models/user.js"></script>
+		<script type="text/javascript" src="controllers/usercontroller.js"></script>
+		<script type="text/javascript" src="controllers/todocontroller.js"></script>
+		<script type="text/javascript" src="views/todoview.js"></script>
+		<script type="text/javascript" src="views/userview.js"></script>
+		<script>UserView.CheckLogin();</script>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="text-center">To Do Application</h1>
+			<form class="form-row addtodo-container" action="javascript:void(0)" onsubmit="return ToDoView.Add(newTodo, newDate)">
+				<input type="text" id="newTodo" name="newTodo" placeholder="What needs to be done?" pattern=".{3,64}" required title="5 to 64 characters">
+				<input type="submit" value="+"  style="position:absolute;top:9px;right:0px;">
+				<input type="datetime-local" id="newDate" name="newDate">
+			</form>
+			<ul class="todo-area" id="todoarea">
+				<!--<li value="5">
+					<input type="checkbox" onChange="ToDoView.Check(this)">
+					jquery
+					<input type="button" value="x" class="btn-circular" onClick="ToDoView.Delete(this)">
+				</li>-->
+			</ul>
+		</div>
+		<script>
+			ToDoView.List();
+			ToDoController.Alert();
+		</script>
+	</body>
 </html>
