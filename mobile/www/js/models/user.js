@@ -1,103 +1,79 @@
 "use strict";
 
-app.factory('User', function (Entity, ToDo) {
-    var User = augment(Entity, function (parent) {
+app.factory('User', function (Entity, $http) {
+	var User = augment(Entity, function (parent) {
+		this.constructor = function () {
+			parent.constructor.call(this);
 
-        this.constructor = function () {
-            parent.constructor.call(this);
-            this.username = "";
-            this.pw = "";
-            this.arrToDo = [];
-        };
-        /**
-         * used like a copy constructor to copy the json object
-         * @param myuser {User} the user to be copied to the current one
-         */
-        this.copy = function (myuser) {
-            parent.copy.call(this,myuser);
-            this.username = myuser.username;
-            this.pw = myuser.pw;
+			this.name = "";
+			this.email = "";
+			this.password = "";
+		};
+		/**
+		 * used like a copy constructor to copy the json object
+		 * @param {User} myuser the user to be copied to the current one
+		 */
+		this.copy = function (myuser) {
+			parent.copy.call(this, myuser);
 
-            this.arrToDo = [];
-            for (var y in myuser.arrToDo) {
-                var x = new ToDo();
-                x.copy(myuser.arrToDo[y]);
-                this.arrToDo.push(x);
-            }
-        };
+			this.name = myuser.name;
+			this.email = myuser.email;
+			this.password = myuser.password;
+		};
 
-        /**
-         * Save the current user data in local storage creating a new one
-         * @return {bollean} true for saved correctly
-         */
-        this.save = function () {
-            if (localStorage.getItem(this.username) == null) {
-                this.update();
-                return true;
-            }
-            return false;
-        };
+		/**
+		 * uses the email and password in object and send a request to login
+		 * @param {function} callback a function to be called on responce succses or failure and pass a boolean true on succses false on failure
+		 */
+		this.login = function (callback) {
+			var self = this;
+			$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+			$http.post(RESTURL + "user/login/", JSON.stringify(self))
+					.then(function (response) {
+					    if (response.data.status == true) {
+							self.copy(response.data.data);
+							User._IsLogedin = true;
+						} else {
+							User._IsLogedin = false;
+						}
+						callback(User._IsLogedin);
+					});
+		};
 
-        /**
-         * update the current user data in local storage
-         */
-        this.update = function () {
-            localStorage.setItem(this.username, JSON.stringify(this));
-        };
+		/**
+		 * uses the data in object and send a request to signup
+		 * @param {function} callback a function to be called on responce succses or failure and pass a boolean true on succses false on failure
+		 */
+		this.signup = function (callback) {
 
-        /**
-         * read the data of the user with the following username 
-         * @param {String} username of the user to be loaded from the local storage
-         */
-        this.read = function (username) {
-            var myuser = JSON.parse(localStorage.getItem(username));
-            this.copy(myuser);
-        };
+			var self = this;
+			$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+			$http.post(RESTURL + "user/create/", JSON.stringify(self))
+					.then(function (response) {
+					    if (response.data.status == true) {
+					        self.copy(response.data.data);
+							User._IsLogedin = true;
+						} else {
+							User._IsLogedin = false;
+						}
+						callback(User._IsLogedin);
+					});
+		};
 
-        /**
-         * delete the current user from the localstorage
-         */
-        this.delete = function () {
-            localStorage.removeItem(this.username);
-            this.logout();
-        };
-        /**
-         * uses the id and pw in the current object
-         * @return {boolean} true for login succsesfull false for wrong id or pw
-         */
-        this.login = function () {
-            var myuser = JSON.parse(localStorage.getItem(this.username));
+	});
 
-            if (myuser !== null && myuser.pw === this.pw) {
-                this.copy(myuser);
-                User._IsLogedin = true;
-                return true;
-            }
-            User._IsLogedin = false;
-            return false;
-        };
-        /**
-         * clear the current user instance and doing a final save and logout
-         */
-        this.logout = function () {
-            this.update();
-            User._Instance = null;
-            User._IsLogedin = false;
-        };
-    });
-
-    User._Instance = null;
-    User._IsLogedin = false;
-    /**
-     * 
-     * @returns {User|User._Instance} an instance for the singleton pattern
-     */
-    User.GetInstance = function () {
-        if (User._Instance === null) {
-            User._Instance = new User();
-            User._IsLogedin = false;
-        }
-        return User._Instance;
-    };
-    return User;
+	User._Instance = null;
+	User._IsLogedin = false;
+	/**
+	 * 
+	 * @returns {User|User._Instance} an instance for the singleton pattern
+	 */
+	User.GetInstance = function () {
+		if (User._Instance === null) {
+			User._Instance = new User();
+			User._IsLogedin = false;
+		}
+		return User._Instance;
+	};
+	return User;
 });
