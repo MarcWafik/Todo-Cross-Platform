@@ -4,6 +4,7 @@ var socketio = require('socket.io');
 
 var SocketResponce = require('./models/socket_responce');
 var Todo = require('./models/todo');
+var History = require('./models/history');
 
 var app = express();
 var server = http.createServer(app).listen(3001, function () {
@@ -14,7 +15,8 @@ var io = socketio(server);
 io.on("connection", function (socket) {
 
 	socket.on("create", function (todoSTR) {
-		Todo.Create(JSON.parse(todoSTR), function (err, rows, fields) {
+		var mytodo = JSON.parse(todoSTR);
+		Todo.Create(mytodo, function (err, rows, fields) {
 			if (err) {
 				return console.log(err);
 			}
@@ -23,6 +25,12 @@ io.on("connection", function (socket) {
 					return console.log(err);
 				}
 				new SocketResponce(socket, "create", JSON.stringify(rows[0])).SendBack(err, rows, fields);
+
+			//	History.Create({action: "create", userID: mytodo.userID, todoID: mytodo.id},new SocketResponce(socket, "history", JSON.stringify(rows[0])).SendBack(err, rows, fields););
+
+
+
+
 			});
 		});
 	});

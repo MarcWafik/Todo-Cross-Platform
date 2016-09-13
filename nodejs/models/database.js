@@ -5,28 +5,28 @@
  */
 var mysql = require("mysql");
 
-var DataBase = function () {};
+var DataBase = function() {};
 
 DataBase._Instance = null;
 /**
  * connect to database if connection not set
  * @returns {mysql connection}Data base instance
  */
-DataBase.getInstance = function () {
-	if (DataBase._Instance === null) {
+DataBase.getInstance = function() {
+    if (DataBase._Instance === null) {
 
-		DataBase._Instance = mysql.createConnection({
-			host: 'localhost',
-			user: 'root',
-			password: '',
-			database: 'todo',
-			multipleStatements: true,
-			port: 3306
-		});
+        DataBase._Instance = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'root',
+            database: 'todo',
+            multipleStatements: true,
+            port: 3306
+        });
 
-		DataBase._Instance.connect();
-	}
-	return DataBase._Instance;
+        DataBase._Instance.connect();
+    }
+    return DataBase._Instance;
 };
 
 module.exports = DataBase;
