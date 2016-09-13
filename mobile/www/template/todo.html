@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ToDoController as ToDoCon">
+<div class="container">
     <h1 class="text-center">To Do Application</h1>
     <form class="form-row addtodo-container">
 
@@ -9,7 +9,7 @@
     </form>
     <ul class="todo-area" id="todoarea">
         <li ng-repeat="x in toDosArr track by $index" value="">
-            <input type="checkbox" ng-click="Check($index, this)" ng-model="x.isChecked">
+            <input type="checkbox" ng-click="Check($index, $scope)" ng-model="x.isChecked">
             {{x.text}}
             <input type="button" value="x" class="btn-circular" ng-click="Delete($index)">
         </li>

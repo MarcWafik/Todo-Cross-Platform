@@ -6,8 +6,6 @@ var ToDo = augment(Parent, function (parent) {
         this.text = "";
         this.notes = "";
         this.isChecked = false;
-        //this.event_DueDateOver = new Event(this);
-        //this.event_ToDoModified = new Event(this);
     };
     /**
 	 * used like a copy constructor to copy the json object
@@ -37,20 +35,15 @@ var ToDo = augment(Parent, function (parent) {
       * sets the timeout if there is time remaing or call it at once if expired
       * @return {function} the action to be done if the todo is expired or calledback take a pramater ToDo
       */
-    this.alertTimeRemainig = function () {
-        var toDo = this;
-        var TodoMessage = function () {
-            alert(toDo.text + "is due since " );
-        }
-
-
+    this.alertTimeRemainig = function (customFunc) {
+        var x = this;
         if (this.dueDate != null && this.dueDate != 'undefined' && this.dueDate != "" && this.dueDate != 0) {
             if (typeof this.dueDate != 'object') {
                 this.dueDate = new Date(this.dueDate);
             }
             var result = this.dueDate.getTime() - new Date().getTime();
             if (result < 2147483647) {
-                setTimeout(TodoMessage, result);
+                setTimeout(function () {customFunc(x);} , result);
             }
         }
     };
